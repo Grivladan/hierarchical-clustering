@@ -12,15 +12,21 @@ np.random.seed(500)  # for repeatability of this tutorial
 a = np.random.multivariate_normal([10, 0], [[3, 1], [1, 4]], size=[10])
 b = np.random.multivariate_normal([0, 20], [[3, 1], [1, 4]], size=[5])
 X = np.concatenate((a, b),)
-print(X)  # 150 samples with 2 dimensions
+print(X)  # 15 samples with 2 dimensions
 plt.scatter(X[:,0], X[:,1])
+
+c = np.random.multivariate_normal([40, 40], [[20, 1], [1, 30]], size=[10,])
+d = np.random.multivariate_normal([80, 80], [[30, 1], [1, 30]], size=[5,])
+e = np.random.multivariate_normal([0, 100], [[100, 1], [1, 100]], size=[5,])
+X2 = np.concatenate((X, c, d, e),)
+plt.scatter(X2[:,0], X2[:,1])
+plt.show()
 
 Z = linkage(X, 'ward')
 
 c, coph_dists = cophenet(Z, pdist(X))
 print(c)
 
-# calculate full dendrogram
 plt.figure(figsize=(25, 10))
 plt.title('Hierarchical Clustering Dendrogram ward method')
 plt.xlabel('sample index')
